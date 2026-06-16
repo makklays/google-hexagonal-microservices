@@ -1,4 +1,4 @@
-# Google style Hexagonal microservices
+# 🧠 Google style Hexagonal microservices
 
 This distributed system is built on a Hexagonal microservices architecture, designed to provide scalable monitoring, logging, and reporting capabilities. 
 
