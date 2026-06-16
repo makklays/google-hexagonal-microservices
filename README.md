@@ -28,6 +28,35 @@ Built from scratch using a Hexagonal microservices architecture, it serves as a 
 
 The system highlights the practical application of Google’s managed infrastructure, specifically leveraging Cloud Spanner and Bigtable, combined with Kafka and gRPC.
 
+## 🏗️ Architecture Overview
 
-//
+The system is designed around **Hexagonal Architecture (Ports and Adapters)** principles to decouple the core business logic from external infrastructure, frameworks, and Google Cloud services.
 
+```mermaid
+graph LR
+    subgraph Infrastructure Layer [Adapters / External]
+        gRPC[gRPC Clients / API]
+        KafkaProd[Kafka Topics]
+        SpannerDB[(Cloud Spanner)]
+        BigtableDB[(Cloud Bigtable)]
+    end
+
+    subgraph Core Application Layer [Domain]
+        InPort[Inbound Ports / Interfaces]
+        BizLogic[Business Logic / Services]
+        OutPort[Outbound Ports / Interfaces]
+        
+        InPort --> BizLogic
+        BizLogic --> OutPort
+    end
+
+    gRPC --> InPort
+    KafkaProd --> InPort
+    OutPort --> SpannerDB
+    OutPort --> BigtableDB
+```
+
+### Core Components:
+* **Domain / Business Logic:** The pure core containing business rules, independent of any databases or messaging systems.
+* **Inbound Ports & Adapters:** Inbound ports define how to interact with the core. gRPC services and Kafka consumers act as inbound adapters, driving the application.
+* **Outbound Ports & Adapters:** Outbound ports define interfaces for external capabilities. Infrastructure adapters implement these interfaces to persist data into Google Cloud Spanner and Bigtable, or publish events to Kafka.
