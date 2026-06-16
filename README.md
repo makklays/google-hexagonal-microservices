@@ -2,7 +2,7 @@
 
 This distributed system is built on a Hexagonal microservices architecture, designed to provide scalable monitoring, logging, and reporting capabilities. 
 
-TechStack: Java 21, Kafka, gRPC (Protobuf), Snipper, BigTable, etc.
+TechStack: Java 21, Kafka, gRPC (Protobuf), Spanner, BigTable, etc.
 
 ## ☕ About 
 
