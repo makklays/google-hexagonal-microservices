@@ -10,7 +10,7 @@ Designed and developed a multi-microservice system from scratch.
 Implemented the core architecture based on Hexagonal architecture principles.
 
 ## 🧩 Architecture Overview
-The application is composed of several microservices that communicate with each other over Kafka and gRPC (protobuf).
+The application is composed of several microservices that communicate with each other over Kafka and gRPC (Protobuf).
 
 ### Consist of next microservices:
 
@@ -26,7 +26,7 @@ The primary goal of this project is to demonstrate the integration of Google Clo
 
 Built from scratch using a Hexagonal microservices architecture, it serves as a showcase for high-throughput processing, logging, and monitoring. 
 
-The system highlights the practical application of Google’s managed infrastructure, specifically leveraging Cloud Spanner and Bigtable, combined with Kafka and gRPC.
+The system highlights the practical application of Google’s managed infrastructure, specifically leveraging Cloud Spanner and Bigtable, combined with Kafka and gRPC (Protobuf).
 
 ## 🏗️ Architecture Overview
 
