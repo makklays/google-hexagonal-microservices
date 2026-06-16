@@ -60,3 +60,58 @@ graph LR
 * **Domain / Business Logic:** The pure core containing business rules, independent of any databases or messaging systems.
 * **Inbound Ports & Adapters:** Inbound ports define how to interact with the core. gRPC services and Kafka consumers act as inbound adapters, driving the application.
 * **Outbound Ports & Adapters:** Outbound ports define interfaces for external capabilities. Infrastructure adapters implement these interfaces to persist data into Google Cloud Spanner and Bigtable, or publish events to Kafka.
+
+## 🚀 How to Run
+
+The entire infrastructure—including Google Cloud emulators, Apache Kafka, and the microservices—is fully containerized and orchestrated via Docker Compose for easy local development.
+
+### 📋 Prerequisites
+
+Before running the system, ensure you have the following installed:
+* [Docker Desktop](https://docker.com) (with Docker Compose)
+* [grpcurl](https://github.com) or [Postman](https://postman.com) (to test gRPC endpoints)
+
+### 🛠️ Quick Start
+
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com
+   cd your-repo-name
+   ```
+
+2. **Build the microservices:**
+   Compile the Java 21 applications and generate Protobuf classes:
+   ```bash
+   ./mvnw clean package -DskipTests
+   # or if you use Gradle: ./gradlew build -x test
+   ```
+
+3. **Spin up the environment:**
+   Start all databases (Cloud Spanner/Bigtable emulators), Kafka, and the microservices in detached mode:
+   ```bash
+   docker-compose up --build -d
+   ```
+
+4. **Verify the containers are running:**
+   ```bash
+   docker ps
+   ```
+### 🔍 Verification & Testing
+
+* **gRPC API:** The microservices expose gRPC endpoints. You can interact with them via `grpcurl`:
+  ```bash
+  grpcurl -plaintext localhost:50051 list
+  ```
+* **Kafka Topics:** Messages are automatically routed between services. You can monitor Kafka logs using:
+  ```bash
+  docker-compose logs -f kafka
+  ```
+* **Google Emulators:** Cloud Spanner and Bigtable run locally inside official Google Cloud emulator images, meaning no active GCP billing is required for testing.
+
+### 🛑 Stopping the System
+
+To stop and remove all containers, networks, and volumes:
+```bash
+docker-compose down -v
+```
+
